@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.ConcurrencyFailureException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ class RequestConcurrencyIntegrationTest extends IntegrationTestSupport {
         assertThat(outcomes).filteredOn(Outcome::succeeded).hasSize(1);
         assertThat(outcomes).filteredOn(outcome -> !outcome.succeeded())
                 .singleElement()
-                .satisfies(outcome -> assertThat(outcome.error()).isInstanceOf(ConcurrencyFailureException.class));
+                .satisfies(outcome -> assertThat(outcome.error()).isInstanceOf(ObjectOptimisticLockingFailureException.class));
         assertAuditMatchesFinalState(id);
     }
 
