@@ -1,0 +1,17 @@
+target/
+data/
+*.mv.db
+*.trace.db
+*.lock.db
+*.class
+*.jar
+*.war
+*.log
+
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+.DS_Store
